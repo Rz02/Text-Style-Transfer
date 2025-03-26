@@ -1,4 +1,4 @@
-# Text Style Transfer
+# Text Style Transfer: TBD
 Implement techniques in NLP that allow for the transformation of text from one style to another while retaining the original content’s meaning.
 
 # Initial Proposal:
