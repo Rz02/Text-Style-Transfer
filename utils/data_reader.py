@@ -1,6 +1,7 @@
-from datasets import load_dataset
+from datasets import load_dataset as hf_load_dataset
+import os
 
-def load_dataset(tsv_path: str):
+def read_dataset(tsv_path: str):
     """
     Reads a TSV file containing toxic and neutral sentences.
     
@@ -15,5 +16,9 @@ def load_dataset(tsv_path: str):
     Returns:
         dataset: A Hugging Face Dataset loaded from the TSV file.
     """
-    dataset = load_dataset("csv", data_files=tsv_path, delimiter="\t", split="train")
+    dataset = hf_load_dataset("csv", data_files=tsv_path, delimiter="\t", split="train")
     return dataset
+
+if __name__ == "__main__":
+    dataset = read_dataset('Data\paradetox.tsv')
+    print(dataset[0])
