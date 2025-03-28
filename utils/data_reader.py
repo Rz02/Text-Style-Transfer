@@ -1,5 +1,4 @@
 from datasets import load_dataset as hf_load_dataset
-import os
 
 def read_dataset(tsv_path: str):
     """
