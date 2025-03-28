@@ -22,7 +22,7 @@ def read_dataset(tsv_path: str):
     return dataset
 
 class DetoxificationDataset(Dataset):
-    def __init__(self, hf_dataset, tokenizer: T5Tokenizer, max_length: int = 512):
+    def __init__(self, hf_dataset, tokenizer, max_length: int = 512):
         """
         Initialize the DetoxificationDataset.
 
@@ -70,7 +70,7 @@ class DetoxificationDataset(Dataset):
             "labels": labels
         }
 
-def create_dataloader(tsv_path: str, tokenizer: T5Tokenizer, batch_size: int = 16, max_length: int = 512, shuffle: bool = True):
+def create_dataloader(tsv_path: str, tokenizer, batch_size: int = 16, max_length: int = 512, shuffle: bool = True):
     """
     Creates a DataLoader for the detoxification dataset.
 
