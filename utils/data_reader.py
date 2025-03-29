@@ -41,7 +41,16 @@ class DetoxificationDataset(Dataset):
         item = self.dataset[idx]
         toxic_text = item["toxic"]
         neutral_text = item.get("neutral1") or item.get("neutral2") or item.get("neutral3")
-        
+        prompt = "detoxify text: "
+        toxic_text_with_prompt = prompt + toxic_text
+
+        input_encodings = self.tokenizer(
+            toxic_text_with_prompt,
+            max_length=self.max_length,
+            padding="max_length",
+            truncation=True,
+            return_tensors="pt"
+        )
         input_encodings = self.tokenizer(
             toxic_text,
             max_length=self.max_length,
@@ -66,7 +75,8 @@ class DetoxificationDataset(Dataset):
         return {
             "input_ids": input_ids,
             "attention_mask": attention_mask,
-            "labels": labels
+            "labels": labels,
+            "toxic_text": toxic_text  # original toxic text for cycle loss if needed
         }
 
 def create_dataloader(tsv_path: str, tokenizer, batch_size: int = 16, max_length: int = 512, shuffle: bool = True):
