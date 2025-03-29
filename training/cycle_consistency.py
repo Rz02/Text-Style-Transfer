@@ -107,7 +107,10 @@ def evaluate_model(model, tokenizer, dataloader, device):
             
             outputs = model.generate(input_ids=input_ids, attention_mask=attention_mask, max_length=128)
             batch_preds = tokenizer.batch_decode(outputs, skip_special_tokens=True)
-            batch_refs = tokenizer.batch_decode(labels, skip_special_tokens=True)
+            
+            labels_for_decode = labels.clone()
+            labels_for_decode[labels_for_decode == -100] = tokenizer.pad_token_id
+            batch_refs = tokenizer.batch_decode(labels_for_decode, skip_special_tokens=True)
             
             if "toxic_text" in batch:
                 batch_orig = list(batch["toxic_text"])
@@ -120,6 +123,7 @@ def evaluate_model(model, tokenizer, dataloader, device):
 
     metrics = compute_all_metrics(predictions, references, original_texts=original_texts)
     return metrics
+
 
 def main():
     run_name = "cycle_consistency_epoch100_lr1e-5"
