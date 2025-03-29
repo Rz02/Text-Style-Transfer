@@ -98,6 +98,8 @@ def evaluate_model(model, tokenizer, dataloader, device):
     predictions = []
     references = []
     original_texts = []
+    total_loss = 0.0
+    count = 0
     
     with torch.no_grad():
         for batch in dataloader:
@@ -105,9 +107,16 @@ def evaluate_model(model, tokenizer, dataloader, device):
             attention_mask = batch["attention_mask"].to(device)
             labels = batch["labels"].to(device)
             
-            outputs = model.generate(input_ids=input_ids, attention_mask=attention_mask, max_length=128)
-            batch_preds = tokenizer.batch_decode(outputs, skip_special_tokens=True)
+            # Compute loss for this batch
+            outputs = model(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
+            total_loss += outputs.loss.item()
+            count += 1
             
+            # Generate predictions
+            gen_outputs = model.generate(input_ids=input_ids, attention_mask=attention_mask, max_length=128)
+            batch_preds = tokenizer.batch_decode(gen_outputs, skip_special_tokens=True)
+            
+            # Decode labels (replace -100 with pad token)
             labels_for_decode = labels.clone()
             labels_for_decode[labels_for_decode == -100] = tokenizer.pad_token_id
             batch_refs = tokenizer.batch_decode(labels_for_decode, skip_special_tokens=True)
@@ -120,34 +129,37 @@ def evaluate_model(model, tokenizer, dataloader, device):
             predictions.extend(batch_preds)
             references.extend(batch_refs)
             original_texts.extend(batch_orig)
-
+    
+    avg_loss = total_loss / count if count > 0 else 0.0
     metrics = compute_all_metrics(predictions, references, original_texts=original_texts)
-    return metrics
+    
+    return metrics,avg_loss
+
 
 
 def main():
     run_name = "cycle_consistency_epoch100_lr1e-5"
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     logger = setup_logger(f"{run_name}.log")
-    # model, tokenizer = load_t5("google-t5/t5-base")
-    model, tokenizer = load_t5("google-t5/t5-small")
+    model, tokenizer = load_t5("google-t5/t5-base")
+    # model, tokenizer = load_t5("google-t5/t5-small")
     
     model.to(device)
     
-    train_dataloader, val_dataloader = create_dataloader("Data/paradetox.tsv", tokenizer, batch_size=8, max_length=128)
+    train_dataloader, val_dataloader = create_dataloader("Data/paradetox.tsv", tokenizer, batch_size=8, max_length=128,eval_size=8)
     optimizer = optim.AdamW(model.parameters(), lr=1e-5)
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.5)
 
-    num_epochs = 30
+    num_epochs = 2
     train_forward_losses = []
     train_cycle_losses = []
     
     eval_bleu_scores = []
-    eval_bert_scores = []
+    # eval_bert_scores = []
     eval_meteor_scores = []
-    eval_sim_scores = []
-    eval_fluency_scores = []
-    
+    # eval_sim_scores = []
+    # eval_fluency_scores = []
+    eval_loss_total = []
     for epoch in range(1, num_epochs + 1):
         logger.info(f"Starting epoch {epoch}")
         avg_forward_loss, avg_cycle_loss = train_epoch(
@@ -157,34 +169,30 @@ def main():
         train_cycle_losses.append(avg_cycle_loss)
 
         scheduler.step()
-        eval_metrics = evaluate_model(model, tokenizer, val_dataloader, device)
+        eval_metrics,eval_loss = evaluate_model(model, tokenizer, val_dataloader, device)
+        eval_loss_total.append(eval_loss)
         logger.info(f"Epoch {epoch} Evaluation Metrics: {eval_metrics}")
         
         bleu_val = eval_metrics["bleu"].get("score", 0.0)
-        bert_val = eval_metrics["bert_score"].get("f1", 0.0)
+        # bert_val = eval_metrics["bert_score"].get("f1", 0.0)
         meteor_val = eval_metrics["meteor"].get("meteor", 0.0)
-        sim_val = eval_metrics["content_preservation"] if eval_metrics["content_preservation"] is not None else 0.0
-        fluency_val = eval_metrics["fluency"]
+        # sim_val = eval_metrics["content_preservation"] if eval_metrics["content_preservation"] is not None else 0.0
+        # fluency_val = eval_metrics["fluency"]
 
         eval_bleu_scores.append(bleu_val)
-        eval_bert_scores.append(bert_val)
+        # eval_bert_scores.append(bert_val)
         eval_meteor_scores.append(meteor_val)
-        eval_sim_scores.append(sim_val)
-        eval_fluency_scores.append(fluency_val)
-        
-        # # Evaluate on training set (only BLEU is computed here, but you can add others similarly)
-        # train_metrics = evaluate_model(model, tokenizer, train_dataloader, device)
-        # train_bleu = train_metrics["bleu"].get("score", 0.0)
-        # train_bleu_scores.append(train_bleu)
-        # logger.info(f"Epoch {epoch} Training BLEU: {train_bleu:.4f}")
+        # eval_sim_scores.append(sim_val)
+        # eval_fluency_scores.append(fluency_val)
     plots_dir = f"results/cycle_consistency/{run_name}"
     try:
-        plot_losses(train_forward_losses, train_cycle_losses, save_dir=plots_dir)
         plot_metric(eval_bleu_scores, "Validation BLEU", save_dir=plots_dir)
-        plot_metric(eval_bert_scores, "Validation BERTScore", save_dir=plots_dir)
+        # plot_metric(eval_bert_scores, "Validation BERTScore", save_dir=plots_dir)
         plot_metric(eval_meteor_scores, "Validation METEOR", save_dir=plots_dir)
-        plot_metric(eval_sim_scores, "Validation Content Preservation", save_dir=plots_dir)
-        plot_metric(eval_fluency_scores, "Validation Fluency", save_dir=plots_dir)
+        # plot_metric(eval_sim_scores, "Validation Content Preservation", save_dir=plots_dir)
+        # plot_metric(eval_fluency_scores, "Validation Fluency", save_dir=plots_dir)
+        plot_losses(train_forward_losses + train_cycle_losses,eval_loss_total, save_dir=plots_dir)
+
     except ImportError:
         logger.info("Plotting module not found. Skipping metric plots.")
 

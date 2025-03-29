@@ -94,7 +94,7 @@ def split_dataset(tsv_path: str, eval_size: int = 500, seed: int = 42):
     splits = full_dataset.train_test_split(test_size=eval_fraction, seed=seed)
     return splits["train"], splits["test"]
 
-def create_dataloader(tsv_path: str, tokenizer, batch_size: int = 16, max_length: int = 512, seed: int = 42):
+def create_dataloader(tsv_path: str, tokenizer, batch_size: int = 16, max_length: int = 512, seed: int = 42,eval_size: int = 500):
     """
     Creates PyTorch DataLoaders for both training and evaluation by splitting the dataset.
     
@@ -108,7 +108,7 @@ def create_dataloader(tsv_path: str, tokenizer, batch_size: int = 16, max_length
     Returns:
         tuple: (train_dataloader, eval_dataloader)
     """
-    train_dataset, eval_dataset = split_dataset(tsv_path, eval_size=500, seed=seed)
+    train_dataset, eval_dataset = split_dataset(tsv_path, eval_size=eval_size, seed=seed)
     train_data = DetoxificationDataset(train_dataset, tokenizer, max_length)
     eval_data = DetoxificationDataset(eval_dataset, tokenizer, max_length)
     train_dataloader = DataLoader(train_data, batch_size=batch_size, shuffle=True)

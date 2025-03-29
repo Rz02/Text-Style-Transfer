@@ -2,6 +2,9 @@ import evaluate
 import numpy as np
 from sentence_transformers import SentenceTransformer, util
 from transformers import pipeline
+bleu = evaluate.load("sacrebleu")
+bert_score = evaluate.load("bertscore")
+meteor = evaluate.load("meteor")
 
 def compute_bleu(predictions, references):
     """
@@ -12,7 +15,6 @@ def compute_bleu(predictions, references):
     Returns:
         dict: BLEU score.
     """
-    bleu = evaluate.load("sacrebleu")
     results = bleu.compute(predictions=predictions, references=[[ref] for ref in references])
     return results
 
@@ -20,7 +22,6 @@ def compute_bert_score(predictions, references):
     """
     Compute BERTScore.
     """
-    bert_score = evaluate.load("bertscore")
     results = bert_score.compute(predictions=predictions, references=references, lang="en")
     return results
 
@@ -28,7 +29,6 @@ def compute_meteor(predictions, references):
     """
     Compute METEOR score.
     """
-    meteor = evaluate.load("meteor")
     results = meteor.compute(predictions=predictions, references=references)
     return results
 
