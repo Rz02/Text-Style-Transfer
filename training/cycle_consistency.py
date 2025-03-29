@@ -8,6 +8,7 @@ from transformers import T5Tokenizer
 from utils.evaluate_performance import compute_all_metrics
 import random
 import numpy as np
+import tqdm
 
 def set_seed(seed):
     random.seed(seed)
@@ -23,7 +24,9 @@ def train_epoch(model, tokenizer, dataloader, optimizer, device, epoch, logger, 
     total_forward_loss = 0.0
     total_cycle_loss = 0.0
 
-    for batch in dataloader:
+    # Use tqdm for batch progress with dynamic postfix
+    progress_bar = tqdm(dataloader, desc=f"Epoch {epoch} Training", leave=False)
+    for batch in progress_bar:
         optimizer.zero_grad()
         input_ids = batch["input_ids"].to(device)
         attention_mask = batch["attention_mask"].to(device)
@@ -75,10 +78,19 @@ def train_epoch(model, tokenizer, dataloader, optimizer, device, epoch, logger, 
         total_forward_loss += forward_loss.item()
         total_cycle_loss += cycle_loss.item()
 
+        # Update tqdm progress bar with current loss values.
+        progress_bar.set_postfix({
+            "Fwd": f"{forward_loss.item():.4f}",
+            "Cycle": f"{cycle_loss.item():.4f}",
+            "Total": f"{total_loss.item():.4f}"
+        })
+
     avg_forward_loss = total_forward_loss / len(dataloader)
     avg_cycle_loss = total_cycle_loss / len(dataloader)
     logger.info(f"Epoch {epoch}: Avg Forward Loss = {avg_forward_loss:.4f}, Avg Cycle Loss = {avg_cycle_loss:.4f}")
+    print(f"Epoch {epoch}: Avg Forward Loss = {avg_forward_loss:.4f}, Avg Cycle Loss = {avg_cycle_loss:.4f}")
     return avg_forward_loss, avg_cycle_loss
+
 
 def evaluate_model(model, tokenizer, dataloader, device):
     model.eval()
@@ -109,8 +121,9 @@ def evaluate_model(model, tokenizer, dataloader, device):
     return metrics
 
 def main():
+    run_name = "cycle_consistency_epoch100_lr1e-5"
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    logger = setup_logger("train.log")
+    logger = setup_logger("results/cycle_consistency"/f"{run_name}.log")
     model, tokenizer = load_t5("google-t5/t5-base")
     model.to(device)
     train_dataloader, val_dataloader = create_dataloader("Data/paradetox.tsv", tokenizer, batch_size=8, max_length=128)
@@ -162,15 +175,15 @@ def main():
         train_bleu = train_metrics["bleu"].get("score", 0.0)
         train_bleu_scores.append(train_bleu)
         logger.info(f"Epoch {epoch} Training BLEU: {train_bleu:.4f}")
-
+    plots_dir = f"results/cycle_consistency/{run_name}"
     try:
-        plot_losses(train_forward_losses, train_cycle_losses, save_dir="plots")
-        plot_metric(eval_bleu_scores, "Validation BLEU", save_dir="plots")
-        plot_metric(eval_bert_scores, "Validation BERTScore", save_dir="plots")
-        plot_metric(eval_meteor_scores, "Validation METEOR", save_dir="plots")
-        plot_metric(eval_sim_scores, "Validation Content Preservation", save_dir="plots")
-        plot_metric(eval_fluency_scores, "Validation Fluency", save_dir="plots")
-        plot_metric(train_bleu_scores, "Training BLEU", save_dir="plots")
+        plot_losses(train_forward_losses, train_cycle_losses, save_dir=plots_dir)
+        plot_metric(eval_bleu_scores, "Validation BLEU", save_dir=plots_dir)
+        plot_metric(eval_bert_scores, "Validation BERTScore", save_dir=plots_dir)
+        plot_metric(eval_meteor_scores, "Validation METEOR", save_dir=plots_dir)
+        plot_metric(eval_sim_scores, "Validation Content Preservation", save_dir=plots_dir)
+        plot_metric(eval_fluency_scores, "Validation Fluency", save_dir=plots_dir)
+        plot_metric(train_bleu_scores, "Training BLEU", save_dir=plots_dir)
     except ImportError:
         logger.info("Plotting module not found. Skipping metric plots.")
 
