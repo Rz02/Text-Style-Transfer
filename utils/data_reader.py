@@ -1,5 +1,4 @@
 from datasets import load_dataset as hf_load_dataset
-import torch
 from torch.utils.data import DataLoader, Dataset
 from transformers import T5Tokenizer
 
