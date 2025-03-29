@@ -150,7 +150,7 @@ def main():
     optimizer = optim.AdamW(model.parameters(), lr=1e-5)
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.5)
 
-    num_epochs = 2
+    num_epochs = 50
     train_forward_losses = []
     train_cycle_losses = []
     
