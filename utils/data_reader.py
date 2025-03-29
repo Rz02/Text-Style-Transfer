@@ -41,7 +41,16 @@ class DetoxificationDataset(Dataset):
         item = self.dataset[idx]
         toxic_text = item["toxic"]
         neutral_text = item.get("neutral1") or item.get("neutral2") or item.get("neutral3")
-        
+        prompt = "detoxify text: "
+        toxic_text_with_prompt = prompt + toxic_text
+
+        input_encodings = self.tokenizer(
+            toxic_text_with_prompt,  # Use the text with the prompt here
+            max_length=self.max_length,
+            padding="max_length",
+            truncation=True,
+            return_tensors="pt"
+        )
         input_encodings = self.tokenizer(
             toxic_text,
             max_length=self.max_length,
