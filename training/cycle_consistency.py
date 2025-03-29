@@ -8,7 +8,7 @@ from transformers import T5Tokenizer
 from utils.evaluate_performance import compute_all_metrics
 import random
 import numpy as np
-import tqdm
+from tqdm import tqdm
 
 def set_seed(seed):
     random.seed(seed)
@@ -123,7 +123,7 @@ def evaluate_model(model, tokenizer, dataloader, device):
 def main():
     run_name = "cycle_consistency_epoch100_lr1e-5"
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    logger = setup_logger("results/cycle_consistency"/f"{run_name}.log")
+    logger = setup_logger(f"{run_name}.log")
     model, tokenizer = load_t5("google-t5/t5-base")
     model.to(device)
     train_dataloader, val_dataloader = create_dataloader("Data/paradetox.tsv", tokenizer, batch_size=8, max_length=128)
