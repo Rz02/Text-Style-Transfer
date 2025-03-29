@@ -84,6 +84,7 @@ def train_epoch(model, tokenizer, dataloader, optimizer, device, epoch, logger, 
             "Cycle": f"{cycle_loss.item():.4f}",
             "Total": f"{total_loss.item():.4f}"
         })
+        
 
     avg_forward_loss = total_forward_loss / len(dataloader)
     avg_cycle_loss = total_cycle_loss / len(dataloader)
@@ -124,8 +125,11 @@ def main():
     run_name = "cycle_consistency_epoch100_lr1e-5"
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     logger = setup_logger(f"{run_name}.log")
-    model, tokenizer = load_t5("google-t5/t5-base")
+    # model, tokenizer = load_t5("google-t5/t5-base")
+    model, tokenizer = load_t5("google-t5/t5-small")
+    
     model.to(device)
+    
     train_dataloader, val_dataloader = create_dataloader("Data/paradetox.tsv", tokenizer, batch_size=8, max_length=128)
     optimizer = optim.AdamW(model.parameters(), lr=1e-5)
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.5)
@@ -140,8 +144,6 @@ def main():
     eval_sim_scores = []
     eval_fluency_scores = []
     
-    train_bleu_scores = []  # New list for training BLEU scores
-
     for epoch in range(1, num_epochs + 1):
         logger.info(f"Starting epoch {epoch}")
         avg_forward_loss, avg_cycle_loss = train_epoch(
@@ -151,10 +153,6 @@ def main():
         train_cycle_losses.append(avg_cycle_loss)
 
         scheduler.step()
-        torch.save(model.state_dict(), f"checkpoints/t5_epoch_{epoch}.pt")
-        logger.info(f"Checkpoint saved for epoch {epoch}")
-
-        # Evaluate on validation set
         eval_metrics = evaluate_model(model, tokenizer, val_dataloader, device)
         logger.info(f"Epoch {epoch} Evaluation Metrics: {eval_metrics}")
         
@@ -170,11 +168,11 @@ def main():
         eval_sim_scores.append(sim_val)
         eval_fluency_scores.append(fluency_val)
         
-        # Evaluate on training set (only BLEU is computed here, but you can add others similarly)
-        train_metrics = evaluate_model(model, tokenizer, train_dataloader, device)
-        train_bleu = train_metrics["bleu"].get("score", 0.0)
-        train_bleu_scores.append(train_bleu)
-        logger.info(f"Epoch {epoch} Training BLEU: {train_bleu:.4f}")
+        # # Evaluate on training set (only BLEU is computed here, but you can add others similarly)
+        # train_metrics = evaluate_model(model, tokenizer, train_dataloader, device)
+        # train_bleu = train_metrics["bleu"].get("score", 0.0)
+        # train_bleu_scores.append(train_bleu)
+        # logger.info(f"Epoch {epoch} Training BLEU: {train_bleu:.4f}")
     plots_dir = f"results/cycle_consistency/{run_name}"
     try:
         plot_losses(train_forward_losses, train_cycle_losses, save_dir=plots_dir)
@@ -183,7 +181,6 @@ def main():
         plot_metric(eval_meteor_scores, "Validation METEOR", save_dir=plots_dir)
         plot_metric(eval_sim_scores, "Validation Content Preservation", save_dir=plots_dir)
         plot_metric(eval_fluency_scores, "Validation Fluency", save_dir=plots_dir)
-        plot_metric(train_bleu_scores, "Training BLEU", save_dir=plots_dir)
     except ImportError:
         logger.info("Plotting module not found. Skipping metric plots.")
 
