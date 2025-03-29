@@ -3,7 +3,7 @@ import numpy as np
 from sentence_transformers import SentenceTransformer, util
 from transformers import pipeline
 bleu = evaluate.load("sacrebleu")
-bert_score = evaluate.load("bertscore")
+# bert_score = evaluate.load("bertscore")
 meteor = evaluate.load("meteor")
 
 def compute_bleu(predictions, references):
