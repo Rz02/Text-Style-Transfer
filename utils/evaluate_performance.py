@@ -94,13 +94,13 @@ def compute_all_metrics(predictions, references, original_texts=None):
     """
     metrics = {}
     metrics["bleu"] = compute_bleu(predictions, references)
-    metrics["bert_score"] = compute_bert_score(predictions, references)
+    # metrics["bert_score"] = compute_bert_score(predictions, references)
     metrics["meteor"] = compute_meteor(predictions, references)
-    if original_texts is not None:
-        metrics["content_preservation"] = compute_content_preservation(original_texts, predictions)
-    else:
-        metrics["content_preservation"] = None
-    metrics["fluency"] = compute_fluency(predictions)
+    # if original_texts is not None:
+    #     metrics["content_preservation"] = compute_content_preservation(original_texts, predictions)
+    # else:
+    #     metrics["content_preservation"] = None
+    # metrics["fluency"] = compute_fluency(predictions)
     return metrics
 
 if __name__ == "__main__":
