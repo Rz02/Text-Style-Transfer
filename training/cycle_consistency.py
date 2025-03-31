@@ -1,4 +1,4 @@
-
+import os
 from utils.data_reader import create_dataloader
 from utils.models import load_t5
 from utils.plot_logger import setup_logger, plot_losses, plot_metric
@@ -86,7 +86,6 @@ def train_epoch(model, tokenizer, dataloader, optimizer, device, epoch, logger, 
             "Total": f"{total_loss.item():.4f}"
         })
         
-
     avg_forward_loss = total_forward_loss / len(dataloader)
     avg_cycle_loss = total_cycle_loss / len(dataloader)
     logger.info(f"Epoch {epoch}: Avg Forward Loss = {avg_forward_loss:.4f}, Avg Cycle Loss = {avg_cycle_loss:.4f}")
@@ -134,25 +133,23 @@ def evaluate_model(model, tokenizer, dataloader, device):
     avg_loss = total_loss / count if count > 0 else 0.0
     metrics = compute_all_metrics(predictions, references, original_texts=original_texts)
     
-    return metrics,avg_loss
-
+    return metrics, avg_loss
 
 
 def main():
-    run_name = "cycle_consistency_epoch20_lr1e-4_batch8_t5base_lambda0.5"
+    run_name = "cycle_consistency_epoch10_lr1e-4_batch8_t5small_lambda0.5"
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     logger = setup_logger(f"{run_name}.log")
     logger.info(run_name)
-    model, tokenizer = load_t5("google-t5/t5-base")
-    # model, tokenizer = load_t5("google-t5/t5-small")
-    
+    # model, tokenizer = load_t5("google-t5/t5-base")
+    model, tokenizer = load_t5("google-t5/t5-small")
     model.to(device)
     
     train_dataloader, val_dataloader = create_dataloader("Data/paradetox.tsv", tokenizer, batch_size=8, max_length=128)
     optimizer = optim.AdamW(model.parameters(), lr=1e-4)
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=50, gamma=0.5)
 
-    num_epochs = 20
+    num_epochs = 10
     train_forward_losses = []
     train_cycle_losses = []
     
@@ -162,6 +159,7 @@ def main():
     # eval_sim_scores = []
     # eval_fluency_scores = []
     eval_loss_total = []
+    
     for epoch in range(1, num_epochs + 1):
         logger.info(f"Starting epoch {epoch}")
         avg_forward_loss, avg_cycle_loss = train_epoch(
@@ -171,7 +169,7 @@ def main():
         train_cycle_losses.append(avg_cycle_loss)
 
         scheduler.step()
-        eval_metrics,eval_loss = evaluate_model(model, tokenizer, val_dataloader, device)
+        eval_metrics, eval_loss = evaluate_model(model, tokenizer, val_dataloader, device)
         eval_loss_total.append(eval_loss)
         logger.info(f"Epoch {epoch} Evaluation Metrics: {eval_metrics}")
         
@@ -186,6 +184,34 @@ def main():
         eval_meteor_scores.append(meteor_val)
         # eval_sim_scores.append(sim_val)
         # eval_fluency_scores.append(fluency_val)
+        
+        # ---- Display 5 sample predictions ----
+        # Use one batch from the validation dataloader.
+        val_sample_batch = next(iter(val_dataloader))
+        sample_input_ids = val_sample_batch["input_ids"].to(device)
+        sample_attention_mask = val_sample_batch["attention_mask"].to(device)
+        sample_labels = val_sample_batch["labels"].to(device)
+        sample_gen_outputs = model.generate(input_ids=sample_input_ids, attention_mask=sample_attention_mask, max_length=128)
+        sample_preds = tokenizer.batch_decode(sample_gen_outputs, skip_special_tokens=True)
+        sample_inputs = tokenizer.batch_decode(sample_input_ids, skip_special_tokens=True)
+        sample_labels_for_decode = sample_labels.clone()
+        sample_labels_for_decode[sample_labels_for_decode == -100] = tokenizer.pad_token_id
+        sample_refs = tokenizer.batch_decode(sample_labels_for_decode, skip_special_tokens=True)
+
+        print(f"\n=== Sample Predictions at Epoch {epoch} ===")
+        for i in range(min(5, len(sample_inputs))):
+            print(f"Input: {sample_inputs[i]}")
+            print(f"Output: {sample_preds[i]}")
+            print(f"Reference: {sample_refs[i]}")
+            print("-" * 50)
+        
+        # ---- Save the model and tokenizer at the end of each epoch ----
+        model_save_path = os.path.join("models", run_name, f"epoch_{epoch}")
+        os.makedirs(model_save_path, exist_ok=True)
+        model.save_pretrained(model_save_path)
+        tokenizer.save_pretrained(model_save_path)
+        logger.info(f"Saved model checkpoint to {model_save_path}")
+        
     train_total_losses = [fwd + cycle for fwd, cycle in zip(train_forward_losses, train_cycle_losses)]
     plots_dir = f"results/cycle_consistency/{run_name}"
     try:
@@ -194,7 +220,7 @@ def main():
         plot_metric(eval_meteor_scores, "Validation METEOR", save_dir=plots_dir)
         # plot_metric(eval_sim_scores, "Validation Content Preservation", save_dir=plots_dir)
         # plot_metric(eval_fluency_scores, "Validation Fluency", save_dir=plots_dir)
-        plot_losses(train_total_losses,eval_loss_total, save_dir=plots_dir)
+        plot_losses(train_total_losses, eval_loss_total, save_dir=plots_dir)
 
     except ImportError:
         logger.info("Plotting module not found. Skipping metric plots.")
