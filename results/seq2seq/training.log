@@ -1,0 +1,6 @@
+2025-03-31 00:13:37,293 - INFO - Step 1: train_loss: 1.3903, eval_loss: 0.9571, bleu: 53.9908, meteor: 0.7545, content_preservation: 0.9073
+2025-03-31 00:27:05,165 - INFO - Step 2: train_loss: 0.9662, eval_loss: 0.8934, bleu: 55.2601, meteor: 0.7622, content_preservation: 0.8885
+2025-03-31 00:40:28,691 - INFO - Step 3: train_loss: 0.8817, eval_loss: 0.8860, bleu: 55.3429, meteor: 0.7637, content_preservation: 0.8858
+2025-03-31 00:53:51,439 - INFO - Step 4: train_loss: 0.8318, eval_loss: 0.8831, bleu: 55.5083, meteor: 0.7639, content_preservation: 0.8809
+2025-03-31 01:07:13,136 - INFO - Step 5: train_loss: 0.8056, eval_loss: 0.8806, bleu: 55.3634, meteor: 0.7612, content_preservation: 0.8798
+2025-03-31 01:07:19,531 - INFO - Step Final Test: bleu: 59.7066, meteor: 0.7999, content_preservation: 0.9018
