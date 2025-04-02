@@ -2,9 +2,18 @@ import evaluate
 import numpy as np
 from sentence_transformers import SentenceTransformer, util
 from transformers import pipeline
+from transformers import RobertaTokenizer, RobertaForSequenceClassification
+import torch
+
 bleu = evaluate.load("sacrebleu")
 # bert_score = evaluate.load("bertscore")
 meteor = evaluate.load("meteor")
+
+toxicity_tokenizer = RobertaTokenizer.from_pretrained('s-nlp/roberta_toxicity_classifier')
+toxicity_model = RobertaForSequenceClassification.from_pretrained('s-nlp/roberta_toxicity_classifier')
+toxicity_model.eval()
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+toxicity_model.to(device)
 
 def compute_bleu(predictions, references):
     """
@@ -55,6 +64,19 @@ def compute_content_preservation(original_texts, generated_texts, embedding_mode
     diag_sim = cosine_scores.diag().cpu().numpy()
     return np.mean(diag_sim)
 
+def compute_toxicity(texts):
+    toxicity_scores = []
+    with torch.no_grad():
+        for text in texts:
+            inputs = toxicity_tokenizer.encode(text, return_tensors="pt", truncation=True, max_length=512).to(device)
+            outputs = toxicity_model(inputs)
+            logits = outputs.logits
+            probs = torch.softmax(logits, dim=1)
+            toxicity_score = probs[0][1].item()
+            toxicity_scores.append(toxicity_score)
+    return np.mean(toxicity_scores) if toxicity_scores else 0.0
+
+
 def compute_fluency(sentences, fluency_pipeline=None):
     """
     Computes fluency as the percentage of sentences classified as fluent by a RoBERTa-based classifier.
@@ -101,6 +123,7 @@ def compute_all_metrics(predictions, references, original_texts=None):
     # else:
     #     metrics["content_preservation"] = None
     # metrics["fluency"] = compute_fluency(predictions)
+    metrics["toxicity"] = compute_toxicity(predictions)
     return metrics
 
 if __name__ == "__main__":
