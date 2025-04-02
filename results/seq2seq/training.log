@@ -1,6 +1,12 @@
-2025-03-31 00:13:37,293 - INFO - Step 1: train_loss: 1.3903, eval_loss: 0.9571, bleu: 53.9908, meteor: 0.7545, content_preservation: 0.9073
-2025-03-31 00:27:05,165 - INFO - Step 2: train_loss: 0.9662, eval_loss: 0.8934, bleu: 55.2601, meteor: 0.7622, content_preservation: 0.8885
-2025-03-31 00:40:28,691 - INFO - Step 3: train_loss: 0.8817, eval_loss: 0.8860, bleu: 55.3429, meteor: 0.7637, content_preservation: 0.8858
-2025-03-31 00:53:51,439 - INFO - Step 4: train_loss: 0.8318, eval_loss: 0.8831, bleu: 55.5083, meteor: 0.7639, content_preservation: 0.8809
-2025-03-31 01:07:13,136 - INFO - Step 5: train_loss: 0.8056, eval_loss: 0.8806, bleu: 55.3634, meteor: 0.7612, content_preservation: 0.8798
-2025-03-31 01:07:19,531 - INFO - Step Final Test: bleu: 59.7066, meteor: 0.7999, content_preservation: 0.9018
+2025-04-02 00:11:44,741 - INFO - Step 1: train_loss: 1.3918, eval_loss: 0.9426, bleu: 54.3404, meteor: 0.7452, content_preservation: 0.8869, toxicity: 0.1905
+2025-04-02 00:24:02,325 - INFO - Step 2: train_loss: 0.9657, eval_loss: 0.8931, bleu: 55.5055, meteor: 0.7628, content_preservation: 0.8835, toxicity: 0.1225
+2025-04-02 00:36:16,818 - INFO - Step 3: train_loss: 0.8786, eval_loss: 0.8830, bleu: 55.4012, meteor: 0.7628, content_preservation: 0.8819, toxicity: 0.1158
+2025-04-02 00:48:31,402 - INFO - Step 4: train_loss: 0.8326, eval_loss: 0.8780, bleu: 55.9081, meteor: 0.7630, content_preservation: 0.8808, toxicity: 0.1122
+2025-04-02 01:00:46,192 - INFO - Step 5: train_loss: 0.8010, eval_loss: 0.8803, bleu: 55.5832, meteor: 0.7627, content_preservation: 0.8775, toxicity: 0.1022
+2025-04-02 01:00:50,664 - INFO - Step Final Test: bleu: 58.7759, meteor: 0.8048, content_preservation: 0.8922, toxicity: 0.1267
+2025-04-02 01:16:43,482 - INFO - Step 1: train_loss: 1.4762, eval_loss: 0.9805, bleu: 53.0293, meteor: 0.7450, content_preservation: 0.9091, toxicity: 0.2946
+2025-04-02 01:29:00,729 - INFO - Step 2: train_loss: 1.0088, eval_loss: 0.9194, bleu: 55.0513, meteor: 0.7558, content_preservation: 0.8906, toxicity: 0.1687
+2025-04-02 01:41:17,146 - INFO - Step 3: train_loss: 0.9353, eval_loss: 0.8972, bleu: 55.1045, meteor: 0.7588, content_preservation: 0.8841, toxicity: 0.1395
+2025-04-02 01:53:33,143 - INFO - Step 4: train_loss: 0.8962, eval_loss: 0.8905, bleu: 55.6371, meteor: 0.7603, content_preservation: 0.8809, toxicity: 0.1225
+2025-04-02 02:05:49,349 - INFO - Step 5: train_loss: 0.8708, eval_loss: 0.8893, bleu: 55.5448, meteor: 0.7612, content_preservation: 0.8802, toxicity: 0.1248
+2025-04-02 02:05:56,563 - INFO - Step Final Test: bleu: 56.1726, meteor: 0.7876, content_preservation: 0.9149, toxicity: 0.1269
