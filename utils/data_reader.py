@@ -87,7 +87,20 @@ def split_dataset(tsv_path: str, eval_size: int = 500, seed: int = 42):
         tuple: (train_dataset, eval_dataset) as Hugging Face Datasets.
     """
     full_dataset = read_dataset(tsv_path)
-    dataset_len = len(full_dataset)
+    
+    filtered_dataset = []
+    identical_count = 0
+    for item in full_dataset:
+        toxic_text = item["toxic"]
+        neutral_text = item.get("neutral1") or item.get("neutral2") or item.get("neutral3")
+        if toxic_text == neutral_text:
+            identical_count += 1
+            continue
+        filtered_dataset.append(item)
+    print(f"Filtered out {identical_count} samples where toxic and neutral texts are identical.")
+    filtered_dataset = full_dataset.from_list(filtered_dataset)
+    
+    dataset_len = len(filtered_dataset)
     if dataset_len < eval_size:
         raise ValueError("Dataset has fewer samples than the requested evaluation size.")
     eval_fraction = eval_size / dataset_len
