@@ -1,0 +1,123 @@
+2025-04-02 06:12:25,374 - INFO - Using device: cuda
+2025-04-02 06:12:25,966 - INFO - Loaded model from results/t5_pretrain_contrastive_toxic/model_checkpoint
+2025-04-02 06:12:26,073 - INFO - Starting epoch 1
+2025-04-02 06:14:41,152 - INFO - Epoch 1: Avg Loss = 1.0970
+2025-04-02 06:14:42,995 - INFO - Epoch 1 Evaluation Metrics: {'bleu': {'score': 53.55798867238328, 'counts': [50, 39, 29, 22], 'totals': [75, 67, 59, 51], 'precisions': [66.66666666666667, 58.208955223880594, 49.152542372881356, 43.13725490196079], 'bp': 1.0, 'sys_len': 75, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.7384310707894047)}}
+2025-04-02 06:14:42,995 - INFO - Starting epoch 2
+2025-04-02 06:16:57,176 - INFO - Epoch 2: Avg Loss = 0.9173
+2025-04-02 06:16:57,504 - INFO - Epoch 2 Evaluation Metrics: {'bleu': {'score': 54.78595737904305, 'counts': [51, 40, 29, 22], 'totals': [74, 66, 58, 51], 'precisions': [68.91891891891892, 60.60606060606061, 50.0, 43.13725490196079], 'bp': 1.0, 'sys_len': 74, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8167786491369831)}}
+2025-04-02 06:16:57,504 - INFO - Starting epoch 3
+2025-04-02 06:19:11,475 - INFO - Epoch 3: Avg Loss = 0.8469
+2025-04-02 06:19:11,785 - INFO - Epoch 3 Evaluation Metrics: {'bleu': {'score': 55.69836442269724, 'counts': [51, 40, 29, 22], 'totals': [73, 65, 57, 50], 'precisions': [69.86301369863014, 61.53846153846154, 50.87719298245614, 44.0], 'bp': 1.0, 'sys_len': 73, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8206429855636379)}}
+2025-04-02 06:19:11,785 - INFO - Starting epoch 4
+2025-04-02 06:21:25,410 - INFO - Epoch 4: Avg Loss = 0.7893
+2025-04-02 06:21:25,691 - INFO - Epoch 4 Evaluation Metrics: {'bleu': {'score': 54.02873516578016, 'counts': [50, 38, 26, 19], 'totals': [70, 62, 54, 47], 'precisions': [71.42857142857143, 61.29032258064516, 48.148148148148145, 40.42553191489362], 'bp': 1.0, 'sys_len': 70, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8103491574378182)}}
+2025-04-02 06:21:25,691 - INFO - Starting epoch 5
+2025-04-02 06:23:39,389 - INFO - Epoch 5: Avg Loss = 0.7353
+2025-04-02 06:23:39,692 - INFO - Epoch 5 Evaluation Metrics: {'bleu': {'score': 51.16378155719485, 'counts': [50, 37, 24, 17], 'totals': [70, 62, 54, 47], 'precisions': [71.42857142857143, 59.67741935483871, 44.44444444444444, 36.170212765957444], 'bp': 1.0, 'sys_len': 70, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8103491574378182)}}
+2025-04-02 06:23:39,692 - INFO - Starting epoch 6
+2025-04-02 06:25:53,999 - INFO - Epoch 6: Avg Loss = 0.6896
+2025-04-02 06:25:54,319 - INFO - Epoch 6 Evaluation Metrics: {'bleu': {'score': 55.880695004010384, 'counts': [51, 39, 27, 20], 'totals': [70, 62, 54, 47], 'precisions': [72.85714285714286, 62.903225806451616, 50.0, 42.5531914893617], 'bp': 1.0, 'sys_len': 70, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8103491574378182)}}
+2025-04-02 06:25:54,319 - INFO - Starting epoch 7
+2025-04-02 06:28:08,383 - INFO - Epoch 7: Avg Loss = 0.6480
+2025-04-02 06:28:08,691 - INFO - Epoch 7 Evaluation Metrics: {'bleu': {'score': 43.742233003474425, 'counts': [47, 33, 20, 13], 'totals': [70, 62, 54, 47], 'precisions': [67.14285714285714, 53.225806451612904, 37.03703703703704, 27.659574468085108], 'bp': 1.0, 'sys_len': 70, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8013851304473748)}}
+2025-04-02 06:28:08,691 - INFO - Starting epoch 8
+2025-04-02 06:30:22,786 - INFO - Epoch 8: Avg Loss = 0.6087
+2025-04-02 06:30:23,082 - INFO - Epoch 8 Evaluation Metrics: {'bleu': {'score': 52.87830391705624, 'counts': [49, 37, 25, 19], 'totals': [70, 62, 54, 47], 'precisions': [70.0, 59.67741935483871, 46.2962962962963, 40.42553191489362], 'bp': 1.0, 'sys_len': 70, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.7938347708267675)}}
+2025-04-02 06:30:23,082 - INFO - Starting epoch 9
+2025-04-02 06:32:37,363 - INFO - Epoch 9: Avg Loss = 0.5725
+2025-04-02 06:32:37,694 - INFO - Epoch 9 Evaluation Metrics: {'bleu': {'score': 46.946286042867385, 'counts': [48, 35, 23, 17], 'totals': [73, 65, 57, 50], 'precisions': [65.75342465753425, 53.84615384615385, 40.35087719298246, 34.0], 'bp': 1.0, 'sys_len': 73, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8028228434780799)}}
+2025-04-02 06:33:36,081 - INFO - Model and tokenizer saved to models/t5_sequential_finetune_toxic_lr_3e-5
+2025-04-02 07:02:12,439 - INFO - Using device: cuda
+2025-04-02 07:02:13,006 - INFO - Loaded model from results/t5_pretrain_triplet_toxic/model_checkpoint
+2025-04-02 07:02:13,119 - INFO - Starting epoch 1
+2025-04-02 07:04:27,873 - INFO - Epoch 1: Avg Loss = 1.2419
+2025-04-02 07:04:29,739 - INFO - Epoch 1 Evaluation Metrics: {'bleu': {'score': 53.50365295219956, 'counts': [51, 40, 30, 23], 'totals': [77, 69, 61, 53], 'precisions': [66.23376623376623, 57.971014492753625, 49.18032786885246, 43.39622641509434], 'bp': 1.0, 'sys_len': 77, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.7390551775181626)}}
+2025-04-02 07:04:29,739 - INFO - Starting epoch 2
+2025-04-02 07:06:44,301 - INFO - Epoch 2: Avg Loss = 1.0212
+2025-04-02 07:06:44,647 - INFO - Epoch 2 Evaluation Metrics: {'bleu': {'score': 53.50365295219956, 'counts': [51, 40, 30, 23], 'totals': [77, 69, 61, 53], 'precisions': [66.23376623376623, 57.971014492753625, 49.18032786885246, 43.39622641509434], 'bp': 1.0, 'sys_len': 77, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.7376493322027882)}}
+2025-04-02 07:06:44,647 - INFO - Starting epoch 3
+2025-04-02 07:08:57,698 - INFO - Epoch 3: Avg Loss = 0.9611
+2025-04-02 07:08:58,018 - INFO - Epoch 3 Evaluation Metrics: {'bleu': {'score': 53.55798867238328, 'counts': [50, 39, 29, 22], 'totals': [75, 67, 59, 51], 'precisions': [66.66666666666667, 58.208955223880594, 49.152542372881356, 43.13725490196079], 'bp': 1.0, 'sys_len': 75, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.7384310707894047)}}
+2025-04-02 07:08:58,018 - INFO - Starting epoch 4
+2025-04-02 07:11:10,301 - INFO - Epoch 4: Avg Loss = 0.9185
+2025-04-02 07:11:10,618 - INFO - Epoch 4 Evaluation Metrics: {'bleu': {'score': 56.29611028649394, 'counts': [50, 39, 29, 22], 'totals': [72, 64, 56, 48], 'precisions': [69.44444444444444, 60.9375, 51.785714285714285, 45.833333333333336], 'bp': 1.0, 'sys_len': 72, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.7470838687545209)}}
+2025-04-02 07:11:10,618 - INFO - Starting epoch 5
+2025-04-02 07:13:22,979 - INFO - Epoch 5: Avg Loss = 0.8844
+2025-04-02 07:13:23,301 - INFO - Epoch 5 Evaluation Metrics: {'bleu': {'score': 56.29611028649394, 'counts': [50, 39, 29, 22], 'totals': [72, 64, 56, 48], 'precisions': [69.44444444444444, 60.9375, 51.785714285714285, 45.833333333333336], 'bp': 1.0, 'sys_len': 72, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.7470838687545209)}}
+2025-04-02 07:13:23,301 - INFO - Starting epoch 6
+2025-04-02 07:15:35,581 - INFO - Epoch 6: Avg Loss = 0.8572
+2025-04-02 07:15:35,890 - INFO - Epoch 6 Evaluation Metrics: {'bleu': {'score': 53.09693241837658, 'counts': [50, 38, 26, 19], 'totals': [71, 63, 55, 48], 'precisions': [70.4225352112676, 60.317460317460316, 47.27272727272727, 39.583333333333336], 'bp': 1.0, 'sys_len': 71, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.817495317002273)}}
+2025-04-02 07:15:35,890 - INFO - Starting epoch 7
+2025-04-02 07:17:47,978 - INFO - Epoch 7: Avg Loss = 0.8317
+2025-04-02 07:17:48,329 - INFO - Epoch 7 Evaluation Metrics: {'bleu': {'score': 57.61850760279525, 'counts': [51, 40, 29, 22], 'totals': [71, 63, 55, 48], 'precisions': [71.83098591549296, 63.492063492063494, 52.72727272727273, 45.833333333333336], 'bp': 1.0, 'sys_len': 71, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8254314471020994)}}
+2025-04-02 07:17:48,329 - INFO - Starting epoch 8
+2025-04-02 07:20:01,122 - INFO - Epoch 8: Avg Loss = 0.8102
+2025-04-02 07:20:01,468 - INFO - Epoch 8 Evaluation Metrics: {'bleu': {'score': 57.61850760279525, 'counts': [51, 40, 29, 22], 'totals': [71, 63, 55, 48], 'precisions': [71.83098591549296, 63.492063492063494, 52.72727272727273, 45.833333333333336], 'bp': 1.0, 'sys_len': 71, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8254314471020994)}}
+2025-04-02 07:20:01,468 - INFO - Starting epoch 9
+2025-04-02 07:22:13,596 - INFO - Epoch 9: Avg Loss = 0.7875
+2025-04-02 07:22:13,895 - INFO - Epoch 9 Evaluation Metrics: {'bleu': {'score': 52.16836702585365, 'counts': [49, 37, 25, 18], 'totals': [70, 62, 54, 47], 'precisions': [70.0, 59.67741935483871, 46.2962962962963, 38.297872340425535], 'bp': 1.0, 'sys_len': 70, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8103491574378182)}}
+2025-04-02 07:22:13,895 - INFO - Starting epoch 10
+2025-04-02 09:42:58,561 - INFO - Epoch 10: Avg Loss = 0.7684
+2025-04-02 09:42:58,858 - INFO - Epoch 10 Evaluation Metrics: {'bleu': {'score': 54.503347369145125, 'counts': [51, 39, 27, 19], 'totals': [71, 63, 55, 47], 'precisions': [71.83098591549296, 61.904761904761905, 49.09090909090909, 40.42553191489362], 'bp': 1.0, 'sys_len': 71, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8399993755645989)}}
+2025-04-02 09:42:58,858 - INFO - Starting epoch 11
+2025-04-02 09:45:11,013 - INFO - Epoch 11: Avg Loss = 0.7461
+2025-04-02 09:45:11,286 - INFO - Epoch 11 Evaluation Metrics: {'bleu': {'score': 52.16836702585365, 'counts': [49, 37, 25, 18], 'totals': [70, 62, 54, 47], 'precisions': [70.0, 59.67741935483871, 46.2962962962963, 38.297872340425535], 'bp': 1.0, 'sys_len': 70, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8103491574378182)}}
+2025-04-02 09:45:11,286 - INFO - Starting epoch 12
+2025-04-02 09:47:22,664 - INFO - Epoch 12: Avg Loss = 0.7374
+2025-04-02 09:47:22,956 - INFO - Epoch 12 Evaluation Metrics: {'bleu': {'score': 54.02873516578016, 'counts': [50, 38, 26, 19], 'totals': [70, 62, 54, 47], 'precisions': [71.42857142857143, 61.29032258064516, 48.148148148148145, 40.42553191489362], 'bp': 1.0, 'sys_len': 70, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8103491574378182)}}
+2025-04-02 09:47:22,956 - INFO - Starting epoch 13
+2025-04-02 09:49:34,957 - INFO - Epoch 13: Avg Loss = 0.7271
+2025-04-02 09:49:35,250 - INFO - Epoch 13 Evaluation Metrics: {'bleu': {'score': 52.16836702585365, 'counts': [49, 37, 25, 18], 'totals': [70, 62, 54, 47], 'precisions': [70.0, 59.67741935483871, 46.2962962962963, 38.297872340425535], 'bp': 1.0, 'sys_len': 70, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8103491574378182)}}
+2025-04-02 09:49:35,250 - INFO - Starting epoch 14
+2025-04-02 09:51:48,193 - INFO - Epoch 14: Avg Loss = 0.7198
+2025-04-02 09:51:48,511 - INFO - Epoch 14 Evaluation Metrics: {'bleu': {'score': 54.02873516578016, 'counts': [50, 38, 26, 19], 'totals': [70, 62, 54, 47], 'precisions': [71.42857142857143, 61.29032258064516, 48.148148148148145, 40.42553191489362], 'bp': 1.0, 'sys_len': 70, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8103491574378182)}}
+2025-04-02 09:51:48,511 - INFO - Starting epoch 15
+2025-04-02 09:54:01,172 - INFO - Epoch 15: Avg Loss = 0.7084
+2025-04-02 09:54:01,523 - INFO - Epoch 15 Evaluation Metrics: {'bleu': {'score': 54.02873516578016, 'counts': [50, 38, 26, 19], 'totals': [70, 62, 54, 47], 'precisions': [71.42857142857143, 61.29032258064516, 48.148148148148145, 40.42553191489362], 'bp': 1.0, 'sys_len': 70, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8103491574378182)}}
+2025-04-02 09:54:01,523 - INFO - Starting epoch 16
+2025-04-02 09:56:14,603 - INFO - Epoch 16: Avg Loss = 0.7011
+2025-04-02 09:56:14,937 - INFO - Epoch 16 Evaluation Metrics: {'bleu': {'score': 52.16836702585365, 'counts': [49, 37, 25, 18], 'totals': [70, 62, 54, 47], 'precisions': [70.0, 59.67741935483871, 46.2962962962963, 38.297872340425535], 'bp': 1.0, 'sys_len': 70, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8103491574378182)}}
+2025-04-02 09:56:14,937 - INFO - Starting epoch 17
+2025-04-02 09:58:27,113 - INFO - Epoch 17: Avg Loss = 0.6915
+2025-04-02 09:58:27,409 - INFO - Epoch 17 Evaluation Metrics: {'bleu': {'score': 54.02873516578016, 'counts': [50, 38, 26, 19], 'totals': [70, 62, 54, 47], 'precisions': [71.42857142857143, 61.29032258064516, 48.148148148148145, 40.42553191489362], 'bp': 1.0, 'sys_len': 70, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8103491574378182)}}
+2025-04-02 09:58:27,409 - INFO - Starting epoch 18
+2025-04-02 10:00:39,949 - INFO - Epoch 18: Avg Loss = 0.6843
+2025-04-02 10:00:40,243 - INFO - Epoch 18 Evaluation Metrics: {'bleu': {'score': 54.02873516578016, 'counts': [50, 38, 26, 19], 'totals': [70, 62, 54, 47], 'precisions': [71.42857142857143, 61.29032258064516, 48.148148148148145, 40.42553191489362], 'bp': 1.0, 'sys_len': 70, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8103491574378182)}}
+2025-04-02 10:00:40,243 - INFO - Starting epoch 19
+2025-04-02 10:02:52,904 - INFO - Epoch 19: Avg Loss = 0.6756
+2025-04-02 10:02:53,204 - INFO - Epoch 19 Evaluation Metrics: {'bleu': {'score': 54.02873516578016, 'counts': [50, 38, 26, 19], 'totals': [70, 62, 54, 47], 'precisions': [71.42857142857143, 61.29032258064516, 48.148148148148145, 40.42553191489362], 'bp': 1.0, 'sys_len': 70, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8103491574378182)}}
+2025-04-02 10:02:53,204 - INFO - Starting epoch 20
+2025-04-02 10:05:05,272 - INFO - Epoch 20: Avg Loss = 0.6683
+2025-04-02 10:05:05,596 - INFO - Epoch 20 Evaluation Metrics: {'bleu': {'score': 54.02873516578016, 'counts': [50, 38, 26, 19], 'totals': [70, 62, 54, 47], 'precisions': [71.42857142857143, 61.29032258064516, 48.148148148148145, 40.42553191489362], 'bp': 1.0, 'sys_len': 70, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8103491574378182)}}
+2025-04-02 10:05:05,596 - INFO - Starting epoch 21
+2025-04-02 10:07:17,974 - INFO - Epoch 21: Avg Loss = 0.6584
+2025-04-02 10:07:18,278 - INFO - Epoch 21 Evaluation Metrics: {'bleu': {'score': 54.02873516578016, 'counts': [50, 38, 26, 19], 'totals': [70, 62, 54, 47], 'precisions': [71.42857142857143, 61.29032258064516, 48.148148148148145, 40.42553191489362], 'bp': 1.0, 'sys_len': 70, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8103491574378182)}}
+2025-04-02 10:07:18,278 - INFO - Starting epoch 22
+2025-04-02 10:09:31,029 - INFO - Epoch 22: Avg Loss = 0.6529
+2025-04-02 10:09:31,336 - INFO - Epoch 22 Evaluation Metrics: {'bleu': {'score': 54.02873516578016, 'counts': [50, 38, 26, 19], 'totals': [70, 62, 54, 47], 'precisions': [71.42857142857143, 61.29032258064516, 48.148148148148145, 40.42553191489362], 'bp': 1.0, 'sys_len': 70, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8103491574378182)}}
+2025-04-02 10:09:31,336 - INFO - Starting epoch 23
+2025-04-02 10:11:43,836 - INFO - Epoch 23: Avg Loss = 0.6531
+2025-04-02 10:11:44,151 - INFO - Epoch 23 Evaluation Metrics: {'bleu': {'score': 54.02873516578016, 'counts': [50, 38, 26, 19], 'totals': [70, 62, 54, 47], 'precisions': [71.42857142857143, 61.29032258064516, 48.148148148148145, 40.42553191489362], 'bp': 1.0, 'sys_len': 70, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8103491574378182)}}
+2025-04-02 10:11:44,151 - INFO - Starting epoch 24
+2025-04-02 10:13:57,157 - INFO - Epoch 24: Avg Loss = 0.6451
+2025-04-02 10:13:57,519 - INFO - Epoch 24 Evaluation Metrics: {'bleu': {'score': 54.02873516578016, 'counts': [50, 38, 26, 19], 'totals': [70, 62, 54, 47], 'precisions': [71.42857142857143, 61.29032258064516, 48.148148148148145, 40.42553191489362], 'bp': 1.0, 'sys_len': 70, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8103491574378182)}}
+2025-04-02 10:13:57,519 - INFO - Starting epoch 25
+2025-04-02 10:16:10,203 - INFO - Epoch 25: Avg Loss = 0.6416
+2025-04-02 10:16:10,524 - INFO - Epoch 25 Evaluation Metrics: {'bleu': {'score': 54.02873516578016, 'counts': [50, 38, 26, 19], 'totals': [70, 62, 54, 47], 'precisions': [71.42857142857143, 61.29032258064516, 48.148148148148145, 40.42553191489362], 'bp': 1.0, 'sys_len': 70, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8103491574378182)}}
+2025-04-02 10:16:10,524 - INFO - Starting epoch 26
+2025-04-02 10:18:23,054 - INFO - Epoch 26: Avg Loss = 0.6404
+2025-04-02 10:18:23,356 - INFO - Epoch 26 Evaluation Metrics: {'bleu': {'score': 54.02873516578016, 'counts': [50, 38, 26, 19], 'totals': [70, 62, 54, 47], 'precisions': [71.42857142857143, 61.29032258064516, 48.148148148148145, 40.42553191489362], 'bp': 1.0, 'sys_len': 70, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8103491574378182)}}
+2025-04-02 10:18:23,356 - INFO - Starting epoch 27
+2025-04-02 10:20:36,222 - INFO - Epoch 27: Avg Loss = 0.6333
+2025-04-02 10:20:36,524 - INFO - Epoch 27 Evaluation Metrics: {'bleu': {'score': 54.02873516578016, 'counts': [50, 38, 26, 19], 'totals': [70, 62, 54, 47], 'precisions': [71.42857142857143, 61.29032258064516, 48.148148148148145, 40.42553191489362], 'bp': 1.0, 'sys_len': 70, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8103491574378182)}}
+2025-04-02 10:20:36,524 - INFO - Starting epoch 28
+2025-04-02 10:22:48,730 - INFO - Epoch 28: Avg Loss = 0.6298
+2025-04-02 10:22:49,024 - INFO - Epoch 28 Evaluation Metrics: {'bleu': {'score': 54.02873516578016, 'counts': [50, 38, 26, 19], 'totals': [70, 62, 54, 47], 'precisions': [71.42857142857143, 61.29032258064516, 48.148148148148145, 40.42553191489362], 'bp': 1.0, 'sys_len': 70, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8103491574378182)}}
+2025-04-02 10:22:49,024 - INFO - Starting epoch 29
+2025-04-02 10:25:01,914 - INFO - Epoch 29: Avg Loss = 0.6275
+2025-04-02 10:25:02,222 - INFO - Epoch 29 Evaluation Metrics: {'bleu': {'score': 54.02873516578016, 'counts': [50, 38, 26, 19], 'totals': [70, 62, 54, 47], 'precisions': [71.42857142857143, 61.29032258064516, 48.148148148148145, 40.42553191489362], 'bp': 1.0, 'sys_len': 70, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8103491574378182)}}
+2025-04-02 10:25:02,222 - INFO - Starting epoch 30
+2025-04-02 10:27:14,953 - INFO - Epoch 30: Avg Loss = 0.6222
+2025-04-02 10:27:15,256 - INFO - Epoch 30 Evaluation Metrics: {'bleu': {'score': 54.02873516578016, 'counts': [50, 38, 26, 19], 'totals': [70, 62, 54, 47], 'precisions': [71.42857142857143, 61.29032258064516, 48.148148148148145, 40.42553191489362], 'bp': 1.0, 'sys_len': 70, 'ref_len': 65}, 'meteor': {'meteor': np.float64(0.8103491574378182)}}
+2025-04-02 10:32:44,997 - INFO - Model and tokenizer saved to models/t5_sequential_finetune_toxic_lr_3e-5

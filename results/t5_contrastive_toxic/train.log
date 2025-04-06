@@ -1,0 +1,21 @@
+2025-03-31 14:41:52,722 - INFO - Using device: cuda
+2025-03-31 14:42:19,029 - INFO - Starting epoch 1
+2025-03-31 14:43:51,144 - INFO - Epoch 1: Avg Contrastive Loss = -13.9502
+2025-03-31 14:43:51,144 - INFO - Starting epoch 2
+2025-03-31 14:45:21,944 - INFO - Epoch 2: Avg Contrastive Loss = -15.6502
+2025-03-31 14:45:21,944 - INFO - Starting epoch 3
+2025-03-31 14:46:53,002 - INFO - Epoch 3: Avg Contrastive Loss = -16.2491
+2025-03-31 14:46:53,003 - INFO - Starting epoch 4
+2025-03-31 14:48:24,051 - INFO - Epoch 4: Avg Contrastive Loss = -16.5240
+2025-03-31 14:48:24,052 - INFO - Starting epoch 5
+2025-03-31 14:49:54,783 - INFO - Epoch 5: Avg Contrastive Loss = -16.6905
+2025-03-31 14:49:54,783 - INFO - Starting epoch 6
+2025-03-31 14:51:25,215 - INFO - Epoch 6: Avg Contrastive Loss = -16.7584
+2025-03-31 14:51:25,216 - INFO - Starting epoch 7
+2025-03-31 14:52:55,888 - INFO - Epoch 7: Avg Contrastive Loss = -16.7900
+2025-03-31 14:52:55,888 - INFO - Starting epoch 8
+2025-03-31 14:54:27,704 - INFO - Epoch 8: Avg Contrastive Loss = -16.8020
+2025-03-31 14:54:27,705 - INFO - Starting epoch 9
+2025-03-31 14:56:01,036 - INFO - Epoch 9: Avg Contrastive Loss = -16.8155
+2025-03-31 14:56:01,037 - INFO - Starting epoch 10
+2025-03-31 14:57:34,294 - INFO - Epoch 10: Avg Contrastive Loss = -16.8269
